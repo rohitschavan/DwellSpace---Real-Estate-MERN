@@ -1,20 +1,24 @@
-# Created by https://www.toptal.com/developers/gitignore/api/react
-# Edit at https://www.toptal.com/developers/gitignore?templates=react
-
-### react ###
+# macOS system files
 .DS_*
+
+# Log files
 *.log
-logs
+logs/
 **/*.backup.*
 **/*.back.*
 
-node_modules
-bower_components
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+bower_components/
 
+# Editor & IDE files
 *.sublime*
+.vscode/
+.idea/
 
-psd
-thumb
-sketch
-
-# End of https://www.toptal.com/developers/gitignore/api/react
+# Design files
+*.psd
+*.thumb
+*.sketch
