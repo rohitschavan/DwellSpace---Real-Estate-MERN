@@ -12,7 +12,7 @@ node_modules/
 client/node_modules/
 server/node_modules/
 bower_components/
-
+server/config.js
 # Editor & IDE files
 *.sublime*
 .vscode/
