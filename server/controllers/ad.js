@@ -85,7 +85,7 @@ export const createAd = async (req, res) => {
                 coordinates: [geo?.[0]?.longitude, geo?.[0]?.latitude]
             },
             googleMap: geo,
-            slug:slugify(`${title}-${address}-${price}-${nanoid(6)}`)
+            slug: slugify(`${title}-${address}-${price}-${nanoid(6)}`)
 
         }).save();
 
@@ -97,7 +97,7 @@ export const createAd = async (req, res) => {
         user.password = undefined;
         user.resetCode = undefined;
         res.json({
-            newad,user
+            newad, user
         })
     } catch (err) {
         console.log(err);
@@ -106,3 +106,14 @@ export const createAd = async (req, res) => {
 
 }
 
+
+export const getAllAds = async (req, res) => {
+    try {
+        const adsForSell = await Ad.find({ action: 'sell' }).select('-googleMap -location -photo.key -photo.Etag -photo.Key').sort({ createdAt: -1 }).limit(12);
+        const adsForRent = await Ad.find({ action: 'rent' }).select('-googleMap -location -photo.key -photo.Etag -photo.Key').sort({ createdAt: -1 }).limit(12);
+        res.json({adsForSell,adsForRent})
+    } catch (err) {
+        console.log(err);
+        res.json({ error: 'Something Went Wrong' })
+    }
+}
