@@ -2,14 +2,14 @@ import React from "react";
 import { useAuth } from "./context/auth";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import Card from "./cards/Card";
 
 const Home = () => {
     //context
     const [auth, setAuth] = useAuth();
 
-    const [adsForSell, setAdsForSell] = useState('');
-    const [adsForRent, setAdsForRent] = useState('');
+    const [adsForSell, setAdsForSell] = useState([]);
+    const [adsForRent, setAdsForRent] = useState([]);
 
     useEffect(() => {
         fetchAllAds()
@@ -23,8 +23,58 @@ const Home = () => {
 
     return (
         <>
-            <h1 className="display-p1 text-light bg-primary">Home</h1>
-            
+
+            <div className="container">
+                <div className="row">
+                 
+                    {
+                        adsForSell.map((e) => {
+                            return (
+                                <>
+
+                                    <Card ad={e} />
+
+                                </>
+                            )
+                        })
+                    }
+
+
+                </div>
+
+            </div>
+
+
+            <div className="container">
+                <div className="row">
+                    <div>
+             
+                    </div>
+                    <br></br>
+                
+                    {
+                        adsForRent.map((e) => {
+                            return (
+                                <>
+
+                                 <Card ad={e} />
+
+                                </>
+                            )
+                        })
+                    }
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
 
         </>
     )
