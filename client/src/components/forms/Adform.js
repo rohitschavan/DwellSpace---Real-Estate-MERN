@@ -63,9 +63,13 @@ const navigate = useNavigate()
                 <div> {JSON.stringify(ad, null, 4)}</div>
                 <div className="mb-3 form-control">
                     <CurrencyInput className='mt-5 form-control' placeholder="Please enter price" defaultValue={ad.price} onValueChange={(value) => setAd({ ...ad, price: value })} />
-                    <input type="number" className="form-control mb-3 " placeholder="Enter How Many Bedrooms" min='0' value={ad.bedrooms} onChange={e => setAd({ ...ad, bedrooms: e.target.value })} />
+                    {
+                        type === 'House' ? (<>
+                        <input type="number" className="form-control mb-3 " placeholder="Enter How Many Bedrooms" min='0' value={ad.bedrooms} onChange={e => setAd({ ...ad, bedrooms: e.target.value })} />
                     <input type="number" className="form-control mb-3 " placeholder="Enter How Many bathrooms" min='0' value={ad.bathrooms} onChange={e => setAd({ ...ad, bathrooms: e.target.value })} />
                     <input type="number" className="form-control mb-3 " placeholder="Enter How Many carpark" min='0' value={ad.carpark} onChange={e => setAd({ ...ad, carpark: e.target.value })} />
+                        </>):''
+                    }
                     <input type="text" className="form-control mb-3 " placeholder="Enter Size of land" value={ad.landsize} onChange={e => setAd({ ...ad, landsize: e.target.value })} />
                     <input type="text" className="form-control mb-3 " placeholder="Enter Title" value={ad.title} onChange={e => setAd({ ...ad, title: e.target.value })} />
                     <textarea className="form-control mb-3 " placeholder="Enter Description" min='0' value={ad.description} onChange={e => setAd({ ...ad, description: e.target.value })} />
