@@ -80,15 +80,3 @@ export const createAd = async (req, res) => {
 
 }
 
-// photos: [],
-// uploading: false,
-// price: 
-// address:
-// bedrooms: 
-// bathrooms: 
-// carpark:
-// landsize: 
-// type:
-// title:
-// description: 
-// loading
