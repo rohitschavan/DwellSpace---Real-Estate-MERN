@@ -2,6 +2,7 @@ import { AWSS3 } from "../config.js";
 import { nanoid } from "nanoid";
 import { GOOGLE_GEO_CODER } from '../config.js';
 import Ad from '../model/ad.js';
+import slugify from "slugify";
 import User from '../model/auth.js'
 export const uploadImage = async (req, res) => {
     try {
@@ -84,6 +85,7 @@ export const createAd = async (req, res) => {
                 coordinates: [geo?.[0]?.longitude, geo?.[0]?.latitude]
             },
             googleMap: geo,
+            slug:slugify(`${title}-${address}-${price}-${nanoid(6)}`)
 
         }).save();
 

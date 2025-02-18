@@ -25,7 +25,7 @@ const Adform = ({ action, type }) => {
         description: "",
         loading: false
     })
-
+const navigate = useNavigate()
     const handleClick = async () => {
         setAd({ ...ad, loading: true })
         try {
@@ -35,6 +35,8 @@ const Adform = ({ action, type }) => {
                 setAd({...ad,loading:false})
             }else{
                 toast.success("ad Created Successfully")
+                setAd({...ad,loading:false});
+                navigate('/dashboard')
             }
         
 
@@ -67,7 +69,7 @@ const Adform = ({ action, type }) => {
                     <input type="text" className="form-control mb-3 " placeholder="Enter Size of land" value={ad.landsize} onChange={e => setAd({ ...ad, landsize: e.target.value })} />
                     <input type="text" className="form-control mb-3 " placeholder="Enter Title" value={ad.title} onChange={e => setAd({ ...ad, title: e.target.value })} />
                     <textarea className="form-control mb-3 " placeholder="Enter Description" min='0' value={ad.description} onChange={e => setAd({ ...ad, description: e.target.value })} />
-                    <Button onClick={handleClick}>Submit</Button>
+                    <Button className={`${ad.loading ? 'disabled':''}`} onClick={handleClick}>{ad.loading ? 'Saving...' : 'Submit'}</Button>
                 </div>
 
 
