@@ -1,6 +1,8 @@
 import { AWSS3 } from "../config.js";
 import { nanoid } from "nanoid";
-import {GOOGLE_GEO_CODER} from '../config.js'
+import { GOOGLE_GEO_CODER } from '../config.js';
+import Ad from '../model/ad.js';
+import User from '../model/auth.js'
 export const uploadImage = async (req, res) => {
     try {
         const { image } = req.body;
@@ -53,30 +55,52 @@ export const removeImage = async (req, res) => {
 
 export const createAd = async (req, res) => {
     try {
-       
-      const{photos,price,address,bedrooms,bathrooms,carpark,landsize,type,title,description,action} = req.body;
-      if(!photos.length){
-        res.json({error:'Photos are required!'})
-      }
-      if(!price){
-        res.json({error:'price is required!'})
-      }
-      if(!address){
-        res.json({error:'address is required!'})
-      }
-      if(!title){
-        res.json({error:'title is required!'})
-      }
-      if(!description){
-        res.json({error:'description is required!'})
-   
-      }
-      const geo =  await GOOGLE_GEO_CODER.geocode(address);
-       console.log('geo=>',geo)
+
+        const { photos, price, address, bedrooms, bathrooms, carpark, landsize, type, title, description, action } = req.body;
+        if (!photos.length) {
+            res.json({ error: 'Photos are required!' })
+        }
+        if (!price) {
+            res.json({ error: 'price is required!' })
+        }
+        if (!address) {
+            res.json({ error: 'address is required!' })
+        }
+        if (!title) {
+            res.json({ error: 'title is required!' })
+        }
+        if (!description) {
+            res.json({ error: 'description is required!' })
+
+        }
+        const geo = await GOOGLE_GEO_CODER.geocode(address);
+        console.log('geo=>', geo);
+
+        const newad = await new Ad({
+            ...req.body,
+            postedBy: req.user._id,
+            location: {
+                type: 'Point',
+                coordinates: [geo?.[0]?.longitude, geo?.[0]?.latitude]
+            },
+            googleMap: geo,
+
+        }).save();
+
+        const user = await User.findByIdAndUpdate(req.user._id,
+            {
+                $addToSet: { role: 'Seller' },
+            }, { new: true });
+
+        user.password = undefined;
+        user.resetCode = undefined;
+        res.json({
+            newad,user
+        })
     } catch (err) {
         console.log(err);
     }
-   
+
 
 }
 

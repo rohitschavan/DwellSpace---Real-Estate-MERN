@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-
+import mongoose from "mongoose";
+const { isObjectIdOrHexString } = mongoose;
 
 const schema = new mongoose.Schema({
     photos: [{}],
@@ -7,12 +7,12 @@ const schema = new mongoose.Schema({
     address:{type:String,required:true},
     bedrooms:Number,
     bathrooms:Number,
-    landsize:Number,
+    landsize:String,
     carpark:Number,
     location:{
         type:{
             type:String,
-            enum:['point'],
+            enum:['Point'],
             default:"Point"
         },
         coordinates:{
@@ -30,7 +30,7 @@ const schema = new mongoose.Schema({
     },
     description:{},
     postedBy:{
-        type:isObjectIdOrHexString,ref:'User'
+        type:mongoose.Schema.Types.ObjectId,ref:'User'
     },
     sold:{type:Boolean,default:false},
     googleMap:{},
@@ -50,4 +50,4 @@ const schema = new mongoose.Schema({
 
 },{timestamps:true})
 
-export default model = ('Ad', schema);
+export default mongoose.model('Ad', schema);
