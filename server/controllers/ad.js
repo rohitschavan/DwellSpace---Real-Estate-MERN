@@ -117,3 +117,15 @@ export const getAllAds = async (req, res) => {
         res.json({ error: 'Something Went Wrong' })
     }
 }
+
+
+export const getSingleAd = async(req,res)=>{
+    try{
+       
+        const ad = await Ad.findOne({slug:req.params.slug}).populate('postedBy','name username email phone company photo.Location');
+        res.json({ad});
+    }catch(err){
+        console.log('error',err);
+    }
+   
+}
