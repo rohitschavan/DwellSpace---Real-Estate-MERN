@@ -10,6 +10,7 @@ const ProtectedRoutes = () => {
     const [ok, setOk] = useState(false);
     const [timer, setTimer] = useState(3);
     const navigate = useNavigate();
+  
     useEffect(() => {
         const getCurrentUser = async () => {
             try {
