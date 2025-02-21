@@ -8,7 +8,7 @@ const Card = ({ ad }) => {
     return (
         <>
             <div className="col-lg-4 p-4 gx-4 gy-4">
-                <Badge.Ribbon text={ad.action}>
+                <Badge.Ribbon text={`${ad.type.charAt(0).toUpperCase() + ad.type.slice(1)} for ${ad.action.charAt(0).toUpperCase() + ad.action.slice(1) }`} color={ad?.action === 'rent' ? 'red':'blue'}>
 
                
                 <div className="card shadow">
