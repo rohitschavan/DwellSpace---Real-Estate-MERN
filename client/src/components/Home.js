@@ -47,11 +47,9 @@ const Home = () => {
 
             <div className="container">
                 <div className="row">
-                    <div>
-             
-                    </div>
+                  
                     <br></br>
-                
+               
                     {
                         adsForRent.map((e) => {
                             return (
