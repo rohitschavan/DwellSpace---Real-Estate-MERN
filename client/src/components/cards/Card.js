@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { TbBath } from "react-icons/tb";
-import { BiArea } from "react-icons/bi";
-import { MdOutlineBedroomChild } from "react-icons/md";
+
 import formatNumber from "currency-number-formatter";
 import { Badge } from "antd";
 import { NavLink } from "react-router-dom";
+import Adfeatures from "./Adfeatures";
 const Card = ({ ad }) => {
     return (
         <>
@@ -28,30 +27,7 @@ const Card = ({ ad }) => {
 
                     }}>
 
-                        <p style={{
-                            fontSize: '17px'
-                        }} className="card-text mb-2 ml-2">
-                            {
-                                ad?.landsize ? (<span><BiArea /> : {ad.landsize}</span>) : ''
-                            }
-
-                        </p>
-                        <p style={{
-                            fontSize: '17px'
-                        }} className="card-text mb-2 ml-2">
-                            {
-                                ad?.bathrooms ? (<span><TbBath /> : {!ad.bedrooms ? '0' : ad.bedrooms}</span>) : ''
-                            }
-
-                        </p>
-                        <p style={{
-                            fontSize: '17px'
-                        }} className="card-text mb-2 ml-2">
-                            {
-                                ad?.bedrooms ? (<span><MdOutlineBedroomChild /> : {ad.bedrooms}</span>) : ''
-                            }
-
-                        </p>
+                        <Adfeatures ad={ad}/>
                     </div>
                 </div>
             </Badge.Ribbon>
