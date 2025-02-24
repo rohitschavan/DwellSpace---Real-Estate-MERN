@@ -4,10 +4,12 @@ import { BiArea } from "react-icons/bi";
 import { MdOutlineBedroomChild } from "react-icons/md";
 import formatNumber from "currency-number-formatter";
 import { Badge } from "antd";
+import { NavLink } from "react-router-dom";
 const Card = ({ ad }) => {
     return (
         <>
             <div className="col-lg-4 p-4 gx-4 gy-4">
+        <NavLink to={`/ad/${ad.slug}`}>
                 <Badge.Ribbon text={`${ad.type.charAt(0).toUpperCase() + ad.type.slice(1)} for ${ad.action.charAt(0).toUpperCase() + ad.action.slice(1) }`} color={ad?.action === 'rent' ? 'red':'blue'}>
 
                
@@ -53,6 +55,7 @@ const Card = ({ ad }) => {
                     </div>
                 </div>
             </Badge.Ribbon>
+            </NavLink>
             </div>
         </>
     );

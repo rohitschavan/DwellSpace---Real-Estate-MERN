@@ -7,7 +7,8 @@ import ImageUpload from "./ImageUpload";
 import { Button } from "antd";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 const Adform = ({ action, type }) => {
     const [ad, setAd] = useState({
         photos: [],

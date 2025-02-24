@@ -17,6 +17,7 @@ import SellLand from './components/ad/sell/SellLand';
 import SellHouse from './components/ad/sell/SellHouse';
 import RentHouse from './components/ad/rent/RentHouse';
 import RentLand from './components/ad/rent/Rentland';
+import AdView from './components/AdView';
 const App = () => {
   return (
     <>
@@ -39,6 +40,7 @@ const App = () => {
             <Route path='/ad/create/sell/House' element={<SellHouse/>} />
             <Route path='/ad/create/rent/House' element={<RentHouse/>} />
             <Route path='/ad/create/rent/Land' element={<RentLand/>} />
+         <Route path='/ad/:slug' element={<AdView/>}></Route>
 
             
             </Route>

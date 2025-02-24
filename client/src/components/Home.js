@@ -3,7 +3,7 @@ import { useAuth } from "./context/auth";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "./cards/Card";
-
+import { NavLink } from "react-router-dom";
 const Home = () => {
     //context
     const [auth, setAuth] = useAuth();
@@ -31,8 +31,9 @@ const Home = () => {
                         adsForSell.map((e) => {
                             return (
                                 <>
-
+                               
                                     <Card ad={e} />
+                              
 
                                 </>
                             )
