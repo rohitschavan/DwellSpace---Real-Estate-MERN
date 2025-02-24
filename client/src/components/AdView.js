@@ -7,7 +7,8 @@ import { height, width } from "@mui/system";
 import logo from "../logo.svg";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Adfeatures from "./cards/Adfeatures";
-
+import formatNumber from "currency-number-formatter";
+import timeAgo from 'time-ago-formatter'
 
 const AdView = () => {
   const photos = [
@@ -89,23 +90,44 @@ const AdView = () => {
           <div className="col col-lg-4 mt-4">
             <div className="d-flex flex-column justify-content-center align-items-center">
               <button
-                style={{ width: "12rem",position:'relative',left:'-60px' }}
-                className={`btn ${ad.action === 'sell' ? 'btn-primary' : 'btn-danger'}  disabled`} 
+                style={{ width: "12rem", position: "relative", left: "-60px" }}
+                className={`btn ${
+                  ad.action === "sell" ? "btn-primary" : "btn-danger"
+                }  disabled`}
               >
                 {ad.type} for {ad.action}
               </button>
               <div className="mt-3">
-              {
-                ad?.sold ? (<h5 style={{color:'red'}}>❌ Sold</h5>) : (<h5 style={{color:'green'}}>✅ Available</h5>)
-              }
-              <div style={{gap:'10px'}} className="d-flex justify-content-center align-items-center"> <FaMapMarkerAlt/> <h2 style = {{position:'relative',top:'5px'}}>{ad.address}</h2>
-           
+                {ad?.sold ? (
+                  <h5 style={{ color: "red" }}>❌ Sold</h5>
+                ) : (
+                  <h5 style={{ color: "green" }}>✅ Available</h5>
+                )}
+                <div
+                  style={{ gap: "10px" }}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  {" "}
+                  <FaMapMarkerAlt />{" "}
+                  <h2 style={{ position: "relative", top: "5px" }}>
+                    {ad.address}
+                  </h2>
+                </div>
+                <div className="d-flex mt-2">
+                  <Adfeatures ad={ad} />
+                </div>
+                <h1 style={{ color: "red" }}>
+                  <span
+                    style={{
+                      color: "black",
+                    }}
+                  >
+                    Price :{" "}
+                  </span>{" "}
+                  &nbsp; &#8377;{formatNumber(ad.price ? ad.price : 0)}
+                </h1>
+                <h4>{timeAgo(ad.createdAt ? ad.createdAt : 'little while ago')}</h4>
               </div>
-              <div className="d-flex mt-2">
-              <Adfeatures ad={ad}/>
-              </div>
-          
-            </div>
             </div>
           </div>
           <div className="col col-lg-8 mt-4">
