@@ -123,9 +123,23 @@ export const getSingleAd = async(req,res)=>{
     try{
        
         const ad = await Ad.findOne({slug:req.params.slug}).populate('postedBy','name username email phone company photo.Location');
-        res.json({ad});
+  
+
+
+        const related = await Ad.find({
+            _id:{$ne:ad.id},
+            action:ad.action,
+            type:ad.type,
+            address:{
+                $regex:ad.googleMap[0].city,
+                $options:'i'
+            }
+        }).limit(3).select("-photos.Key -photos.key -googleMap -photos.Etag -photos.Bucket")
+        res.json({ad,related});
     }catch(err){
         console.log('error',err);
     }
+
+ 
    
 }
