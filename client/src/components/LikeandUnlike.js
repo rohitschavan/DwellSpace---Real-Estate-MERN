@@ -12,7 +12,9 @@ const navigate = useNavigate('/')
 const handleLike = async()=>{
     try{
      if(auth?.user === null){
-        navigate('/')
+        navigate('/login',{
+            state:`ad/${ad.slug}`
+        })
         return
      }
      const {data} = await axios.post('/wishlist',{adId:ad._id});
@@ -28,7 +30,9 @@ const handleLike = async()=>{
 const handleUnLike = async()=>{
     try{
      if(auth?.user === null){
-        navigate('/')
+        navigate('/login',{
+            state:`ad/${ad.slug}`
+        })
         return
      }
      const {data} = await axios.delete(`/wishlist/${ad._id}`);

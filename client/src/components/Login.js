@@ -5,11 +5,13 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./context/auth";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const Login = ()=>{
 const [auth,setAuth] = useAuth();
 const [email,setEmail] = useState('');
 const [password,setPassword] = useState('');
 const [loading,setLoading]= useState(false);
+const location = useLocation();
 const navigate = useNavigate();
 const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -20,7 +22,7 @@ try{
     setAuth(data);
     localStorage.setItem('auth',JSON.stringify(data));
     toast.success('Login Successful');
-    navigate('/')
+   location?.state !== null ? navigate(location.state) : navigate('/dashboard')
   }
   if(data?.error){
     toast.error(data.error);
