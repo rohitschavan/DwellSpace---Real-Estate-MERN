@@ -10,7 +10,21 @@ const ProtectedRoutes = () => {
     const [ok, setOk] = useState(false);
     const [timer, setTimer] = useState(3);
     const navigate = useNavigate();
-  
+ 
+    useEffect(() => {
+        if (!ok && timer > 0) {
+            const timeout = setTimeout(() => {
+                setTimer((prev) => prev - 1);
+            }, 1000);
+
+            return () => clearTimeout(timeout); // Cleanup to prevent multiple timeouts
+        }
+
+        if (timer === 0) {
+            navigate('/'); // Navigate when timer reaches 0
+        }
+
+    }, [ok, timer, navigate]);
     useEffect(() => {
         const getCurrentUser = async () => {
             try {
@@ -35,7 +49,11 @@ const ProtectedRoutes = () => {
    
     return (
         <>
-            {ok ? <Outlet /> : <h1 style={{margin:'auto'}}>{`Unauthorised! Redirecting to safety in  ${timer}`}</h1>}
+        <div style={{height:'100vh'}} className="d-flex justify-content-center align-items-center w-100 flex-column">
+            <img style={{height:'25rem'}} src="https://img.freepik.com/free-vector/401-error-unauthorized-concept-illustration_114360-1934.jpg"></img>
+        {ok ? <Outlet /> : <h1 style={{margin:'auto'}}>{`Unauthorised! Redirecting to safety in  ${timer}`}</h1>}
+        </div>
+          
         </> 
     )
 }
