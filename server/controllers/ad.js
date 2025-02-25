@@ -111,7 +111,7 @@ export const getAllAds = async (req, res) => {
     try {
         const adsForSell = await Ad.find({ action: 'sell' }).select('-googleMap -location -photo.key -photo.Etag -photo.Key').sort({ createdAt: -1 }).limit(12);
         const adsForRent = await Ad.find({ action: 'rent' }).select('-googleMap -location -photo.key -photo.Etag -photo.Key').sort({ createdAt: -1 }).limit(12);
-        res.json({adsForSell,adsForRent})
+        res.json({ adsForSell, adsForRent })
     } catch (err) {
         console.log(err);
         res.json({ error: 'Something Went Wrong' })
@@ -119,27 +119,62 @@ export const getAllAds = async (req, res) => {
 }
 
 
-export const getSingleAd = async(req,res)=>{
-    try{
-       
-        const ad = await Ad.findOne({slug:req.params.slug}).populate('postedBy','name username email phone company photo.Location');
-  
+export const getSingleAd = async (req, res) => {
+    try {
+
+        const ad = await Ad.findOne({ slug: req.params.slug }).populate('postedBy', 'name username email phone company photo.Location');
+
 
 
         const related = await Ad.find({
-            _id:{$ne:ad.id},
-            action:ad.action,
-            type:ad.type,
-            address:{
-                $regex:ad.googleMap[0].city,
-                $options:'i'
+            _id: { $ne: ad.id },
+            action: ad.action,
+            type: ad.type,
+            address: {
+                $regex: ad.googleMap[0].city,
+                $options: 'i'
             }
         }).limit(3).select("-photos.Key -photos.key -googleMap -photos.Etag -photos.Bucket")
-        res.json({ad,related});
-    }catch(err){
-        console.log('error',err);
+        res.json({ ad, related });
+    } catch (err) {
+        console.log('error', err);
     }
 
- 
-   
+
+
+}
+
+
+
+
+
+export const removeFromWishlist = async (req, res) => {
+
+    try {
+        const user = await User.findByIdAndUpdate(req.user._id, {
+            $pull: { wishlist: req.params.adId },
+
+        }, { new: true })
+
+        const { password, resetCode, ...rest } = user._doc;
+        res.json(rest);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+export const addToWishlist = async (req, res) => {
+
+    try {
+        const user = await User.findByIdAndUpdate(req.user._id, {
+            $addToSet: { wishlist: req.body.adId },
+
+        }, { new: true })
+
+        const { password, resetCode, ...rest } = user._doc;
+        res.json(rest);
+    } catch (err) {
+        console.log(err);
+    }
 }

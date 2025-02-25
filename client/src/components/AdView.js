@@ -8,7 +8,8 @@ import logo from "../logo.svg";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Adfeatures from "./cards/Adfeatures";
 import formatNumber from "currency-number-formatter";
-import timeAgo from 'time-ago-formatter'
+import timeAgo from 'time-ago-formatter';
+import LikeandUnlike from "./LikeandUnlike";
 
 const AdView = () => {
   const photos = [
@@ -36,7 +37,7 @@ const AdView = () => {
         const { data } = await axios.get(`/ads/${slug}`);
         setAd(data.ad);
         setRelated(data.related);
-        console.log(data);
+
       } catch (err) {
         console.error("Error in fetching the API:", err);
       }
@@ -89,6 +90,7 @@ const AdView = () => {
         <div className="row">
           <div className="col col-lg-4 mt-4">
             <div className="d-flex flex-column justify-content-center align-items-center">
+              <div className="d-flex justify-content-between">
               <button
                 style={{ width: "12rem", position: "relative", left: "-60px" }}
                 className={`btn ${
@@ -97,6 +99,9 @@ const AdView = () => {
               >
                 {ad.type} for {ad.action}
               </button>
+              <LikeandUnlike ad={ad}/>
+              </div>
+             
               <div className="mt-3">
                 {ad?.sold ? (
                   <h5 style={{ color: "red" }}>❌ Sold</h5>

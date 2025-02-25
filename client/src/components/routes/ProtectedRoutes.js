@@ -21,7 +21,7 @@ const ProtectedRoutes = () => {
         }
 
         if (timer === 0) {
-            navigate('/'); // Navigate when timer reaches 0
+            navigate('/login'); // Navigate when timer reaches 0
         }
 
     }, [ok, timer, navigate]);
@@ -49,10 +49,27 @@ const ProtectedRoutes = () => {
    
     return (
         <>
-        <div style={{height:'100vh'}} className="d-flex justify-content-center align-items-center w-100 flex-column">
-            <img style={{height:'25rem'}} src="https://img.freepik.com/free-vector/401-error-unauthorized-concept-illustration_114360-1934.jpg"></img>
-        {ok ? <Outlet /> : <h1 style={{margin:'auto'}}>{`Unauthorised! Redirecting to safety in  ${timer}`}</h1>}
-        </div>
+
+        
+        
+{ok ? (
+    <Outlet />
+) : (
+    <div
+        style={{ height: "100vh" }}
+        className="d-flex justify-content-center align-items-center w-100 flex-column"
+    >
+        <img
+            style={{ height: "25rem" }}
+            src="https://img.freepik.com/free-vector/401-error-unauthorized-concept-illustration_114360-1934.jpg"
+            alt="Unauthorized Access"
+        />
+        <h1 style={{ margin: "auto" }}>
+            Unauthorised! Redirecting to safety in {timer}
+        </h1>
+    </div>
+)}
+
           
         </> 
     )
