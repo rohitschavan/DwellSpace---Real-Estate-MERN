@@ -10,6 +10,7 @@ import Adfeatures from "./cards/Adfeatures";
 import formatNumber from "currency-number-formatter";
 import timeAgo from 'time-ago-formatter';
 import LikeandUnlike from "./LikeandUnlike";
+import Mapcard from "./cards/Mapcard";
 
 const AdView = () => {
   const photos = [
@@ -150,6 +151,13 @@ const AdView = () => {
                 </Modal>
               ) : null}
             </ModalGateway>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col col-lg-8 offset-2">
+            <Mapcard ad={ad}/>
           </div>
         </div>
       </div>
