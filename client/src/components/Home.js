@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "./cards/Card";
 import { NavLink } from "react-router-dom";
+import Footer from "./Navigation/Footer";
 const Home = () => {
     //context
     const [auth, setAuth] = useAuth();
@@ -66,6 +67,8 @@ const Home = () => {
 
                 </div>
             </div>
+
+                      <Footer/>
 
 
 

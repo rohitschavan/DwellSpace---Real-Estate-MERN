@@ -4,8 +4,9 @@ const Footer = ()=>{
     return(
         <>
         <div style={{
-            width:'100% !important'
-        }} className="container-fluid  ">
+            width:'100% !important',
+          
+        }} className=" my-3 ">
   <footer className="text-center text-lg-start" style={{backgroundColor: '#222'}}>
     <div className="container d-flex justify-content-center py-5">
     
