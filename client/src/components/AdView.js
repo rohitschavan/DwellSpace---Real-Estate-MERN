@@ -12,9 +12,13 @@ import timeAgo from 'time-ago-formatter';
 import LikeandUnlike from "./LikeandUnlike";
 import Mapcard from "./cards/Mapcard";
 import CustomCard from "./CustomCard";
+import { NavLink } from "react-router-dom";
+
 import './Bigcard.css';
 
+
 const AdView = () => {
+  
   const photos = [
     {
       src: "https://realist-realestate.s3.eu-north-1.amazonaws.com/RYDvetDL0ilL3xFWFPNpM.jpeg",
@@ -40,6 +44,7 @@ const AdView = () => {
         const { data } = await axios.get(`/ads/${slug}`);
         setAd(data.ad);
         setRelated(data.related);
+        console.log(data.related)
 
       } catch (err) {
         console.error("Error in fetching the API:", err);
@@ -87,6 +92,10 @@ const AdView = () => {
     setModalIsOpen(false);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]); 
+
   return (
     <>
       <div className="container">
@@ -109,13 +118,13 @@ const AdView = () => {
               <div className="postcard__text t-dark">
                 <h1 className="postcard__title green"><a href="#">{ad?.title}</a></h1>
                 <div className="d-flex flex-row align-items-center ">
-                <Adfeatures ad={ad} />
-                <div className="mb-2 ml-2">
-                <LikeandUnlike ad={ad} />
+                  <Adfeatures ad={ad} />
+                  <div className="mb-2 ml-2">
+                    <LikeandUnlike ad={ad} />
+                  </div>
+
                 </div>
-              
-                </div>
-              
+
                 <div className="postcard__subtitle small">
                   <time dateTime="2020-05-25 12:00:00">
                     <i className="fas fa-calendar-alt mr-2" />{timeAgo(ad.createdAt ? ad.createdAt : 'little while ago')}
@@ -129,25 +138,25 @@ const AdView = () => {
                 )}</div>
                 <ul className="postcard__tagbox">
                   <li style={{
-                    height:'80px'
-                  }} className="tag__item  "><i className="fas fa-tag mr-2" /><h1 style={{ color: "red",}}>
-                  <span
-                    style={{
-                      color: "black",
-                      padding:'2rem',
-                     
-                   
-                    }}
-                  >
-                    Price :{" "}
-                  </span>{" "}
-                  &nbsp; &#8377;{formatNumber(ad.price ? ad.price : 0)}
-                </h1></li>
+                    height: '80px'
+                  }} className="tag__item  "><i className="fas fa-tag mr-2" /><h1 style={{ color: "red", }}>
+                      <span
+                        style={{
+                          color: "black",
+                          padding: '2rem',
+
+
+                        }}
+                      >
+                        Price :{" "}
+                      </span>{" "}
+                      &nbsp; &#8377;{formatNumber(ad.price ? ad.price : 0)}
+                    </h1></li>
 
                 </ul>
               </div>
             </article>
-            
+
           </div>
           <div className="col col-lg-6 mt-4">
 
@@ -174,6 +183,39 @@ const AdView = () => {
             <Mapcard ad={ad} />
             <CustomCard ad={ad} />
             <br />
+
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col col-lg-12">
+          <h3 className="mb-2" style={{
+              color:'black'
+            }}>Related Properties</h3>
+                <hr/>
+            <div style={{gap:'2rem'}} className="d-flex flex-row">
+
+            {related.length > 0 ? (related?.map((e,index) => {
+              return (
+                <>
+                <NavLink key={index} to={`/ad/${e?.slug}`}>
+                  <div className="card" style={{ width: '18rem' }}>
+                    <img style={{minHeight:'10rem',}} className="card-img-top" src={e?.photos?.[0]?.Location || ""} alt="Card image cap" />
+                    <div className="card-body">
+                      <p style={{color:'black'}} className="card-text">
+                        <span style={{color:'black'}}>{e?.title}</span>
+                      </p>
+                    </div>
+                  </div>
+                  </NavLink>
+                </>
+              )
+            })):(<>
+            <h4 style={{color:'red'}}>No Related Properties......</h4 >
+            </>)}
+            </div>
 
           </div>
         </div>

@@ -18,6 +18,7 @@ import SellHouse from './components/ad/sell/SellHouse';
 import RentHouse from './components/ad/rent/RentHouse';
 import RentLand from './components/ad/rent/Rentland';
 import AdView from './components/AdView';
+import Footer from './components/Navigation/Footer';
 const App = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const App = () => {
         <AuthProvider>
           <Main />
           <Toaster />
+        
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
@@ -44,9 +46,11 @@ const App = () => {
 
             
             </Route>
-       
+      
           </Routes>
+          <Footer/>
         </AuthProvider>
+ 
       </BrowserRouter>
     </>
   )

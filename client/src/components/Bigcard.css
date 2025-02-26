@@ -3,7 +3,7 @@
  body {
 	 font-family: "Baloo 2", cursive;
 	 font-size: 16px;
-	 color: #fff;
+	 
 	 text-rendering: optimizeLegibility;
 	 font-weight: initial;
 }
@@ -95,17 +95,22 @@
 	 justify-content: center;
 }
  .postcard .postcard__tagbox .tag__item {
-	 display: inline-block;
-	 background: rgba(83, 83, 83, 0.4);
-	 border-radius: 3px;
-	 padding: 2.5px 10px;
-	 margin: 0 5px 5px 0;
-	 cursor: default;
-	 user-select: none;
-	 transition: background-color 0.3s;
+    display: inline-block;
+    background: #ffffffeb;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    left: 0px;
+    padding: 2.5px 10px;
+    margin: 0 5px 5px 0;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: background-color 0.3s;
 }
  .postcard .postcard__tagbox .tag__item:hover {
-	 background: rgba(83, 83, 83, 0.8);
+	 background: rgba(255, 254, 254, 0.498);
+
 }
  .postcard:before {
 	 content: "";
