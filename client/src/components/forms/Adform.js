@@ -65,7 +65,7 @@ const navigate = useNavigate()
                 <div className="mb-3 form-control">
                     <CurrencyInput className='mt-5 form-control' placeholder="Please enter price" defaultValue={ad.price} onValueChange={(value) => setAd({ ...ad, price: value })} />
                     {
-                        type === 'House' ? (<>
+                        type === 'house' ? (<>
                         <input type="number" className="form-control mb-3 " placeholder="Enter How Many Bedrooms" min='0' value={ad.bedrooms} onChange={e => setAd({ ...ad, bedrooms: e.target.value })} />
                     <input type="number" className="form-control mb-3 " placeholder="Enter How Many bathrooms" min='0' value={ad.bathrooms} onChange={e => setAd({ ...ad, bathrooms: e.target.value })} />
                     <input type="number" className="form-control mb-3 " placeholder="Enter How Many carpark" min='0' value={ad.carpark} onChange={e => setAd({ ...ad, carpark: e.target.value })} />

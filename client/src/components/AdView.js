@@ -11,6 +11,7 @@ import formatNumber from "currency-number-formatter";
 import timeAgo from 'time-ago-formatter';
 import LikeandUnlike from "./LikeandUnlike";
 import Mapcard from "./cards/Mapcard";
+import CustomCard from "./CustomCard";
 
 const AdView = () => {
   const photos = [
@@ -158,6 +159,9 @@ const AdView = () => {
         <div className="row">
           <div className="col col-lg-8 offset-2">
             <Mapcard ad={ad}/>
+            <CustomCard ad={ad}/>
+            <br/>
+            
           </div>
         </div>
       </div>
