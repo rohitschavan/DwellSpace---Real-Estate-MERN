@@ -12,6 +12,7 @@ import timeAgo from 'time-ago-formatter';
 import LikeandUnlike from "./LikeandUnlike";
 import Mapcard from "./cards/Mapcard";
 import CustomCard from "./CustomCard";
+import './Bigcard.css';
 
 const AdView = () => {
   const photos = [
@@ -90,54 +91,66 @@ const AdView = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col col-lg-4 mt-4">
-            <div className="d-flex flex-column justify-content-center align-items-center">
-              <div className="d-flex justify-content-between">
+          <div className="col col-lg-6 mt-4">
+            <div className="d-flex justify-content-center mb-2">
               <button
                 style={{ width: "12rem", position: "relative", left: "-60px" }}
-                className={`btn ${
-                  ad.action === "sell" ? "btn-primary" : "btn-danger"
-                }  disabled`}
+                className={`btn ${ad.action === "sell" ? "btn-primary" : "btn-danger"
+                  }  disabled`}
               >
                 {ad.type} for {ad.action}
               </button>
-              <LikeandUnlike ad={ad}/>
-              </div>
-             
-              <div className="mt-3">
-                {ad?.sold ? (
+            </div>
+            <article className="postcard light green">
+
+              <a className="postcard__img_link" href="#">
+
+              </a>
+              <div className="postcard__text t-dark">
+                <h1 className="postcard__title green"><a href="#">{ad?.title}</a></h1>
+                <div className="d-flex flex-row align-items-center ">
+                <Adfeatures ad={ad} />
+                <div className="mb-2 ml-2">
+                <LikeandUnlike ad={ad} />
+                </div>
+              
+                </div>
+              
+                <div className="postcard__subtitle small">
+                  <time dateTime="2020-05-25 12:00:00">
+                    <i className="fas fa-calendar-alt mr-2" />{timeAgo(ad.createdAt ? ad.createdAt : 'little while ago')}
+                  </time>
+                </div>
+                <div className="postcard__bar" />
+                <div className="postcard__preview-txt">{ad?.sold ? (
                   <h5 style={{ color: "red" }}>❌ Sold</h5>
                 ) : (
                   <h5 style={{ color: "green" }}>✅ Available</h5>
-                )}
-                <div
-                  style={{ gap: "10px" }}
-                  className="d-flex justify-content-center align-items-center"
-                >
-                  {" "}
-                  <FaMapMarkerAlt />{" "}
-                  <h2 style={{ position: "relative", top: "5px" }}>
-                    {ad.address}
-                  </h2>
-                </div>
-                <div className="d-flex mt-2">
-                  <Adfeatures ad={ad} />
-                </div>
-                <h1 style={{ color: "red" }}>
+                )}</div>
+                <ul className="postcard__tagbox">
+                  <li style={{
+                    height:'80px'
+                  }} className="tag__item  "><i className="fas fa-tag mr-2" /><h1 style={{ color: "red",}}>
                   <span
                     style={{
                       color: "black",
+                      padding:'2rem',
+                     
+                   
                     }}
                   >
                     Price :{" "}
                   </span>{" "}
                   &nbsp; &#8377;{formatNumber(ad.price ? ad.price : 0)}
-                </h1>
-                <h4>{timeAgo(ad.createdAt ? ad.createdAt : 'little while ago')}</h4>
+                </h1></li>
+
+                </ul>
               </div>
-            </div>
+            </article>
+            
           </div>
-          <div className="col col-lg-8 mt-4">
+          <div className="col col-lg-6 mt-4">
+
             <Gallery onClick={openLightBox} photos={generatePhotosArray()} />
             <ModalGateway>
               {modalIsOpen ? (
@@ -158,10 +171,10 @@ const AdView = () => {
       <div className="container">
         <div className="row">
           <div className="col col-lg-8 offset-2">
-            <Mapcard ad={ad}/>
-            <CustomCard ad={ad}/>
-            <br/>
-            
+            <Mapcard ad={ad} />
+            <CustomCard ad={ad} />
+            <br />
+
           </div>
         </div>
       </div>
