@@ -35,7 +35,9 @@ const CustomCard = ({ad})=>{
               <h3 className="f-bold mt-3">Highlights</h3>
               <br/>
               <li className="widget-49-meeting-item h5"><span>{ad?.title}</span></li>
-              <li className="widget-49-meeting-item lead"><span><HTMLRenderer html={ad?.description?.replaceAll('.','<br/> <br/>')}/></span></li>
+              <li className="widget-49-meeting-item lead"><span>✔️ <HTMLRenderer html={ad?.description?.replaceAll('.','<br/> <br/> ✔️ ')}/></span></li>
+              
+              <br/>
               <li className="widget-49-meeting-item"><span>{ad?.address}</span></li>
             </ul>
             <div className="widget-49-meeting-action">
