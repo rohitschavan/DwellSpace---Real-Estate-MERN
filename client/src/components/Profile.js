@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "./Navigation/Sidebar";
 import { useAuth } from "./context/auth";
-import slugify from 'slugify'
+import slugify from 'slugify';
+import ProfileUpload from "./forms/ProfileUpload";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Profile = () => {
     // Context
@@ -20,38 +23,59 @@ const Profile = () => {
     const [loading, setloading] = useState(false);
 
     useEffect(() => {
-        setEmail(auth?.user?.email || "");
-        setUsername(auth?.user?.username || "");
-        setName(auth?.user?.name || "");
-        setCompany(auth?.user?.company || "");
-        setAddress(auth?.user?.address || "");
-        setPhone(auth?.user?.phone || "");
-        setAbout(auth?.user?.about || "");
-        setPhoto(auth?.user?.photo || null);
-    }, [auth]);
+        if (auth.user) {
+            setEmail(auth.user?.email );
+            setUsername(auth.user?.username );
+            setName(auth.user?.name);
+            setCompany(auth.user?.company);
+            setAddress(auth.user?.address);
+            setPhone(auth.user?.phone);
+            setAbout(auth.user?.about);
+            setPhoto(auth.user?.photo);
+        }
+    }, []);
 
-
-    const handleSubmit = (e) => {
-
-        
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-            console.log({ email, username, name, company, address, phone, about, photo });
-        }catch(err){
-            console.log('')
-        }
-
        
+        try {
+            setloading(true);
+            const { data } = await axios.put('/update-profile', { email, username, name, company, address, phone, about, photo });
+            
+            if (data?.error) {
+                toast.error(data.error);
+                setloading(false);
+            } else {
+
+                
+
+
+                setAuth({ ...auth, user: data });
+
+                const fromLs = JSON.parse(localStorage.getItem('auth'));
+                fromLs.user = data;
+                localStorage.setItem('auth', JSON.stringify(fromLs));
+                setloading(false);
+                toast.success('Profile Updated Successfully')
+            }
+
+        } catch (err) {
+            console.log(err);
+            setloading(false);
+        }
     };
 
+ 
     return (
+
         <>
             <h1 className="display-4 text-light bg-primary text-center p-3">Profile</h1>
             <SideBar />
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
+                        <ProfileUpload setPhoto={setPhoto} photo={photo} uploading={uploading} setUploading={setUploading} setloading={setloading} />
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label className="form-label">Email</label>
@@ -85,7 +109,7 @@ const Profile = () => {
                                 <label className="form-label">Photo</label>
                                 <input type="file" className="form-control" onChange={(e) => setPhoto(e.target.files[0])} />
                             </div>
-                            <button type="submit" className="btn btn-primary">{loading ? 'Processing...' :'Save Changes'}</button>
+                            <button type="submit" className="btn btn-primary">{loading ? 'Processing...' : 'Save Changes'}</button>
                         </form>
                     </div>
                 </div>

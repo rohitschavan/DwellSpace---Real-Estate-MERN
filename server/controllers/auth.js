@@ -327,7 +327,7 @@ export const updateProfileFunc = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.user._id, req.body, { new: true });
         user.password = undefined;
-        user.refreshToken = undefinedl
+        user.refreshToken = undefined;
         res.json(user)
     } catch (err) {
         res.json({ error: "Cannot update the user" })
