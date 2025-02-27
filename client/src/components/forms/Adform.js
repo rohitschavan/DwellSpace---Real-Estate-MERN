@@ -61,8 +61,8 @@ const navigate = useNavigate()
                         }
                     }} apiOptions='in' apiKey={mapapikey} />
                 </div>
-                <div> {JSON.stringify(ad, null, 4)}</div>
-                <div className="mb-3 form-control">
+               
+                <div className="mb-3 form-control mt-5">
                     <CurrencyInput className='mt-5 form-control' placeholder="Please enter price" defaultValue={ad.price} onValueChange={(value) => setAd({ ...ad, price: value })} />
                     {
                         type === 'house' ? (<>

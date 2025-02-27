@@ -18,7 +18,7 @@ import SellHouse from './components/ad/sell/SellHouse';
 import RentHouse from './components/ad/rent/RentHouse';
 import RentLand from './components/ad/rent/Rentland';
 import AdView from './components/AdView';
-import Footer from './components/Navigation/Footer';
+import Profile from './components/Profile';
 const App = () => {
   return (
     <>
@@ -42,6 +42,7 @@ const App = () => {
             <Route path='/ad/create/sell/House' element={<SellHouse/>} />
             <Route path='/ad/create/rent/House' element={<RentHouse/>} />
             <Route path='/ad/create/rent/Land' element={<RentLand/>} />
+            <Route path='/user/profile' element={<Profile/>} />
          <Route path='/ad/:slug' element={<AdView/>}></Route>
 
             
