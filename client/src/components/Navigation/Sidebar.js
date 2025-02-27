@@ -10,6 +10,7 @@ const SideBar = ()=>{
   <li className="nav-item d-flex flex-row">
     <NavLink className="nav-link" to="/ad/create">Link</NavLink>
     <NavLink className="nav-link" to="/user/profile">Profile</NavLink>
+    <NavLink className="nav-link" to="/user/settings">Settings</NavLink>
   </li>
 </ul>
 

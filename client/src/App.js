@@ -19,6 +19,7 @@ import RentHouse from './components/ad/rent/RentHouse';
 import RentLand from './components/ad/rent/Rentland';
 import AdView from './components/AdView';
 import Profile from './components/Profile';
+import Settings from './components/Settings';
 const App = () => {
   return (
     <>
@@ -43,6 +44,7 @@ const App = () => {
             <Route path='/ad/create/rent/House' element={<RentHouse/>} />
             <Route path='/ad/create/rent/Land' element={<RentLand/>} />
             <Route path='/user/profile' element={<Profile/>} />
+            <Route path='/user/settings' element={<Settings/>} />
          <Route path='/ad/:slug' element={<AdView/>}></Route>
 
             

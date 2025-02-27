@@ -302,26 +302,30 @@ export const getProfileFunc = async (req, res) => {
 
 export const updatePassFunc = async (req, res) => {
     try {
-        const { password } = req.body;
-
-        if (!password) {
-            res.json({ error: "No Password Provided" });
-        }
-        if (password && password?.length < 6) {
-            res.json({ error: "Password should include at least 6 Characters" })
-        }
-
-        const user = await User.findOneAndUpdate(req.user._id, {
-            password: hashPassword(password)
-        });
-
-        res.json({ ok: true });
-
-
+      const { password } = req.body;
+  
+      if (!password) {
+        return res.status(400).json({ error: "No Password Provided" });
+      }
+  
+      if (password.length < 6) {
+        return res.status(400).json({ error: "Password should include at least 6 characters" });
+      }
+  
+      const user = await User.findByIdAndUpdate(
+        req.user._id,
+        { password: await hashPassword(password) },
+        { new: true }
+      );
+  
+      return res.json({ ok: true });
+  
     } catch (err) {
-        res.json({ error: "Cannot change the password" })
+      console.error("Password update error:", err);
+      return res.status(500).json({ error: "Cannot change the password" });
     }
-}
+  };
+  
 
 export const updateProfileFunc = async (req, res) => {
     try {
