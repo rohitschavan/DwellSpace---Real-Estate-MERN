@@ -13,12 +13,13 @@ import LikeandUnlike from "./LikeandUnlike";
 import Mapcard from "./cards/Mapcard";
 import CustomCard from "./CustomCard";
 import { NavLink } from "react-router-dom";
+import ContactSeller from "./forms/ContactSeller";
 
 import './Bigcard.css';
 
 
 const AdView = () => {
-  
+
   const photos = [
     {
       src: "https://realist-realestate.s3.eu-north-1.amazonaws.com/RYDvetDL0ilL3xFWFPNpM.jpeg",
@@ -94,7 +95,7 @@ const AdView = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]); 
+  }, [slug]);
 
   return (
     <>
@@ -188,33 +189,35 @@ const AdView = () => {
         </div>
       </div>
 
+      <div><ContactSeller /></div>
+
       <div className="container">
         <div className="row">
           <div className="col col-lg-12">
-          <h3 className="mb-2" style={{
-              color:'black'
+            <h3 className="mb-2" style={{
+              color: 'black'
             }}>Related Properties</h3>
-                <hr/>
-            <div style={{gap:'2rem'}} className="d-flex flex-row">
+            <hr />
+            <div style={{ gap: '2rem' }} className="d-flex flex-row">
 
-            {related.length > 0 ? (related?.map((e,index) => {
-              return (
-                <>
-                <NavLink key={index} to={`/ad/${e?.slug}`}>
-                  <div className="card" style={{ width: '18rem' }}>
-                    <img style={{minHeight:'10rem',}} className="card-img-top" src={e?.photos?.[0]?.Location || ""} alt="Card image cap" />
-                    <div className="card-body">
-                      <p style={{color:'black'}} className="card-text">
-                        <span style={{color:'black'}}>{e?.title}</span>
-                      </p>
-                    </div>
-                  </div>
-                  </NavLink>
-                </>
-              )
-            })):(<>
-            <h4 style={{color:'red'}}>No Related Properties......</h4 >
-            </>)}
+              {related.length > 0 ? (related?.map((e, index) => {
+                return (
+                  <>
+                    <NavLink key={index} to={`/ad/${e?.slug}`}>
+                      <div className="card" style={{ width: '18rem' }}>
+                        <img style={{ minHeight: '10rem', }} className="card-img-top" src={e?.photos?.[0]?.Location || ""} alt="Card image cap" />
+                        <div className="card-body">
+                          <p style={{ color: 'black' }} className="card-text">
+                            <span style={{ color: 'black' }}>{e?.title}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </NavLink>
+                  </>
+                )
+              })) : (<>
+                <h4 style={{ color: 'red' }}>No Related Properties......</h4 >
+              </>)}
             </div>
 
           </div>

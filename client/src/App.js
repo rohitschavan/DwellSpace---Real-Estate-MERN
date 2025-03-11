@@ -27,7 +27,7 @@ const App = () => {
         <AuthProvider>
           <Main />
           <Toaster />
-        
+
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
@@ -36,24 +36,22 @@ const App = () => {
             <Route path='/auth/forgot-password' element={<ForgotPass />} />
             <Route path='/auth/access-account/:token' element={<AccessAccount />} />
 
-            <Route path='/' element={<ProtectedRoutes/>}>
-            <Route path='dashboard' element={<Dashboard/>} />
-            <Route path='ad/create' element={<CreateAd/>} />
-            <Route path='/ad/create/sell/Land' element={<SellLand/>} />
-            <Route path='/ad/create/sell/House' element={<SellHouse/>} />
-            <Route path='/ad/create/rent/House' element={<RentHouse/>} />
-            <Route path='/ad/create/rent/Land' element={<RentLand/>} />
-            <Route path='/user/profile' element={<Profile/>} />
-            <Route path='/user/settings' element={<Settings/>} />
-         <Route path='/ad/:slug' element={<AdView/>}></Route>
-
-            
+            <Route path='/' element={<ProtectedRoutes />}>
+              <Route path='dashboard' element={<Dashboard />} />
+              <Route path='ad/create' element={<CreateAd />} />
+              <Route path='/ad/create/sell/Land' element={<SellLand />} />
+              <Route path='/ad/create/sell/House' element={<SellHouse />} />
+              <Route path='/ad/create/rent/House' element={<RentHouse />} />
+              <Route path='/ad/create/rent/Land' element={<RentLand />} />
+              <Route path='/user/profile' element={<Profile />} />
+              <Route path='/user/settings' element={<Settings />} />
+              <Route path='/ad/:slug' element={<AdView />}></Route>
             </Route>
-      
+
           </Routes>
 
         </AuthProvider>
- 
+
       </BrowserRouter>
     </>
   )
