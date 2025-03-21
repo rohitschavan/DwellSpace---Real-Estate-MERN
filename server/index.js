@@ -14,6 +14,8 @@ mongoose.connect(DATABASE).then(() => { console.log('Mongo DB Connected') }).cat
 app.use(express.json({limit:"10mb"}));
 app.use(morgan('dev'));
 app.use(cors());
+ // Handle preflight requests
+
 //routes middleware
 
 app.use('/api',authRoutes);
