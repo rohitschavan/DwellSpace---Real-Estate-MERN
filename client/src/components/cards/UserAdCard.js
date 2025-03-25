@@ -7,7 +7,7 @@ import Adfeatures from "./Adfeatures";
 const UserAdCard = ({ ad }) => {
     return (
         <>
-            <div className="col-lg-4 p-4 gx-4 gy-4">
+            <div key={ad._id} className="col-lg-4 p-4 gx-4 gy-4">
         <NavLink to={`user/ad/${ad.slug}`}>
                 <Badge.Ribbon text={`${ad.type.charAt(0).toUpperCase() + ad.type.slice(1)} for ${ad.action.charAt(0).toUpperCase() + ad.action.slice(1) }`} color={ad?.action === 'rent' ? 'red':'blue'}>
 

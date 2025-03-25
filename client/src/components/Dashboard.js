@@ -6,7 +6,9 @@ import UserAdCard from "./cards/UserAdCard";
 const Dashboard = () => {
   const [auth, setAuth] = useAuth();
   const [total, setTotal] = useState();
-  const [ads, setAds] = useState();
+  const [ads, setAds] = useState([]);
+  const [loading, setLoading] = useState();
+  const [page, setPage] = useState(1);
 
   const seller = auth.user?.role.includes('Seller');
 
@@ -14,9 +16,27 @@ const Dashboard = () => {
     fetchAds();
   }, [auth.token !== ''])
 
+  useEffect(()=>{
+    if(page === 1) return;
+    fetchMoreAds();
+  },[page])
+
+  const fetchMoreAds = async()=>{
+    try{
+      setLoading(true);
+  
+   const {data} = await axios.get(`/user-ads/${page}`);
+   setAds([...ads,...data.ads]);
+   setTotal(data.total);
+   setLoading(false);
+    }catch(err){
+      console.log(err);
+    }
+  }
+  
   const fetchAds = async () => {
     try {
-      const { data } = await axios.get('/user-ads');
+      const { data } = await axios.get(`/user-ads/${page}`);
       if (data?.err) {
         console.log(data?.err);
       }
@@ -48,17 +68,27 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="row">
-             
-                {
-                  ads?.map((e)=>{
-                    return(
-                      <>
-                      <UserAdCard ad ={e}/>
-                      </>
-                    )
-                  })
+
+              {
+                ads?.map((e) => {
+                  return (
+                    <>
+                      <UserAdCard ad={e} />
+                    </>
+                  )
+                })
+              }
+
+            </div>
+            <div className="row">
+              <div className="col col-lg-12">
+                <button className="btn btn-warning" onClick={(e) => {
+                  e.preventDefault()
+                  setPage(page + 1)
+
                 }
-              
+                }>{loading ? 'Loading...' : `Load More ${ads.length}/${total}`}</button>
+              </div>
             </div>
           </div>
         </>
