@@ -209,7 +209,7 @@ export const enquiredProperties = async (req, res) => {
 export const wishlist = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        const ads = await User.find({ _id: user.wishlist })
+        const ads = await Ad.find({ _id: user.wishlist }).sort({createdAt:-1})
         res.json({ads});
 
     } catch (err) {

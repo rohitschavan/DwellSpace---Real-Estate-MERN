@@ -23,7 +23,7 @@ const Wishlist = () => {
 
       }
 
-      setAds(data)
+      setAds(data?.ads)
 
 
     } catch (err) {
@@ -52,10 +52,13 @@ const Wishlist = () => {
             <div className="row">
 
               {
-                ads?.map((e) => {
+                ads?.map((e,index) => {
                   return (
                     <>
+                   
+         
                       <UserAdCard ad={e} />
+                   
                     </>
                   )
                 })
