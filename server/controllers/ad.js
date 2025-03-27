@@ -181,15 +181,38 @@ export const addToWishlist = async (req, res) => {
 
 
 
-export const userAds = async(req,res)=>{
-    try{
+export const userAds = async (req, res) => {
+    try {
         const perPage = 2;
         const page = req.params.page ? req.params.page : 1
-        const total = await Ad.find({postedBy:req.user._id});
-        const ads = await Ad.find({postedBy:req.user._id}).populate("postedBy",'name email username phone company').skip((page-1)*perPage).limit(perPage).sort({createdAt:-1});
-        res.json({ads,total:total.length})
-    }catch(err){
+        const total = await Ad.find({ postedBy: req.user._id });
+        const ads = await Ad.find({ postedBy: req.user._id }).populate("postedBy", 'name email username phone company').skip((page - 1) * perPage).limit(perPage).sort({ createdAt: -1 });
+        res.json({ ads, total: total.length })
+    } catch (err) {
         console.log(err);
     }
 }
 
+
+
+export const enquiredProperties = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const ads = (await User.find({ _id: user.enquiredProperties })).sort({ createdAt: -1 });
+        res.json({ ads });
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const wishlist = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const ads = await User.find({ _id: user.wishlist })
+        res.json({ads});
+
+    } catch (err) {
+        console.log(err);
+    }
+}

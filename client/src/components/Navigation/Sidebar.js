@@ -9,6 +9,8 @@ const SideBar = ()=>{
   </li>
   <li className="nav-item d-flex flex-row">
     <NavLink className="nav-link" to="/ad/create">Link</NavLink>
+    <NavLink className="nav-link" to="/user/wishlist">Wishlist</NavLink>
+    <NavLink className="nav-link" to="/user/enquiries">Enquiries</NavLink>
     <NavLink className="nav-link" to="/user/profile">Profile</NavLink>
     <NavLink className="nav-link" to="/user/settings">Settings</NavLink>
   </li>
