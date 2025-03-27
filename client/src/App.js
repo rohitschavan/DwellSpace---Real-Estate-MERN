@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SearchProvider } from './components/context/search';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -27,6 +28,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <AuthProvider>
+          <SearchProvider>
           <Main />
           <Toaster />
 
@@ -53,6 +55,7 @@ const App = () => {
             </Route>
 
           </Routes>
+          </SearchProvider>
 
         </AuthProvider>
 
