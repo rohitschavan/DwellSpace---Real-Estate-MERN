@@ -5,6 +5,7 @@ import axios from "axios";
 import Card from "./cards/Card";
 import { NavLink } from "react-router-dom";
 import Footer from "./Navigation/Footer";
+import Search from "./Search";
 const Home = () => {
     //context
     const [auth, setAuth] = useAuth();
@@ -24,7 +25,7 @@ const Home = () => {
 
     return (
         <>
-
+<Search/>
             <div className="container">
                 <div className="row">
                  
