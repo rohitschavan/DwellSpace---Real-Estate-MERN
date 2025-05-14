@@ -211,8 +211,48 @@ export const wishlist = async (req, res) => {
         const user = await User.findById(req.user._id);
         const ads = await Ad.find({ _id: user.wishlist }).sort({createdAt:-1})
         res.json({ads});
+       
 
     } catch (err) {
+        console.log(err);
+    }
+}
+
+
+export const search = async(req,res)=>{
+    try{
+    
+      const{action,address,type,priceRange} = req.query
+     const [min, max] = priceRange || [0, Infinity];
+
+      const geo = await GOOGLE_GEO_CODER.geocode(address);
+
+     
+
+      const ads = await Ad.find({
+        actions:action === 'Buy' ? "Sell" : 'Rent',
+        type,
+        price:{
+            $gte:min,
+            $lte:max
+        },
+        location:{
+            $near:{
+                $maxDistance:50000,
+                $geometry:{
+                    type:'Point',
+                    coordinates:[geo?.[0]?.longitude,geo?.[0]?.latitude]
+                }
+
+            }
+        }
+      }).limit(24).select('-photos.Key, -photos.key')
+
+      res.json({ads})
+
+      
+
+    }catch(err){
         console.log(err);
     }
 }

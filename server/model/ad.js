@@ -50,4 +50,7 @@ const schema = new mongoose.Schema({
 
 },{timestamps:true})
 
+
+schema.index({location:'2dsphere'})
+
 export default mongoose.model('Ad', schema);

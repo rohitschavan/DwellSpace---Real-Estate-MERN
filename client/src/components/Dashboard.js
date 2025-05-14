@@ -64,7 +64,7 @@ const Dashboard = () => {
         <>
           <div className="container mt-2 ">
             <div className="row">
-              <div className="col-lg-8 offset-2">
+              <div className="col-lg-12 offset-2">
                 <h2>List of ads {total}</h2>
               </div>
             </div>
@@ -74,11 +74,15 @@ const Dashboard = () => {
                 ads?.map((e) => {
                   return (
                     <>
-                    <NavLink to={`/ad/${e.slug}`}key={e._id}>
-
-              
+                    
+                     <NavLink style={{
+                      width:'100%'
+                     }} to={`/ad/${e.slug}`}key={e._id}>
                       <UserAdCard ad={e} />
                             </NavLink>
+           
+            
+                    
                     </>
                   )
                 })
