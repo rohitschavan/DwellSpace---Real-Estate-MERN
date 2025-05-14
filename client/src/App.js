@@ -23,6 +23,7 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import Wishlist from './components/Wishlist';
 import Enquiries from './components/Enquiries';
+import Search from './components/Search';
 const App = () => {
   return (
     <>
@@ -43,6 +44,7 @@ const App = () => {
             <Route path='/' element={<ProtectedRoutes />}>
               <Route path='dashboard' element={<Dashboard />} />
               <Route path='ad/create' element={<CreateAd />} />
+              <Route path='search' element={<Search />} />
               <Route path='/ad/create/sell/Land' element={<SellLand />} />
               <Route path='/ad/create/sell/House' element={<SellHouse />} />
               <Route path='/ad/create/rent/House' element={<RentHouse />} />
@@ -52,6 +54,7 @@ const App = () => {
               <Route path='/user/wishlist' element={<Wishlist />} />
               <Route path='/user/enquiries' element={<Enquiries />} />
               <Route path='/ad/:slug' element={<AdView />}></Route>
+              <Route path='/dashboard/user/ad/:slug' element={<AdView />}></Route>
             </Route>
 
           </Routes>

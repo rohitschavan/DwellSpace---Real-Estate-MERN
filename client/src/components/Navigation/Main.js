@@ -36,7 +36,7 @@ const Main = () => {
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <NavLink className="nav-link m-2" aria-current="page" to={'/'}>Home</NavLink>
-                            <a className="nav-link pointer m-2" onClick={handlePostAdClick}>Post Ad</a>
+                            <NavLink to={'/dashboard'} className="nav-link pointer m-2" onClick={handlePostAdClick}>Dashboard</NavLink>
                             {!loggedIn ? <>
                                 <NavLink className="nav-link m-2" to={'/login'}>Login</NavLink>
                                 <NavLink className="nav-link m-2" to={'/register'}>Register</NavLink>

@@ -3,6 +3,7 @@ import SideBar from "./Navigation/Sidebar";
 import { useAuth } from "./context/auth";
 import axios from "axios";
 import UserAdCard from "./cards/UserAdCard";
+import { NavLink } from "react-router-dom";
 const Dashboard = () => {
   const [auth, setAuth] = useAuth();
   const [total, setTotal] = useState();
@@ -73,7 +74,11 @@ const Dashboard = () => {
                 ads?.map((e) => {
                   return (
                     <>
+                    <NavLink to={`/ad/${e.slug}`}key={e._id}>
+
+              
                       <UserAdCard ad={e} />
+                            </NavLink>
                     </>
                   )
                 })
